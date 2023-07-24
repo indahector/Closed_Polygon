@@ -28,6 +28,13 @@ def sort_points_to_polygon(points):
     
     return sorted_polygon
 
+def add_closing_coordinates(d):
+    """ Adds the first 'lat long' to the end"""
+    i = re.search(r"\d", d).start()
+    j = re.search(r'(\d)[^\d]*$', d).start() + 1
+    c = d.index(',')    
+    return d[:j] + ", " + d[i:c] + d[j:]
+
 def closed_polygon(X,Y):
     points = [(x,y) for x,y in zip(X,Y)]
     sorted_points = sort_points_to_polygon(points)
